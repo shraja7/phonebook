@@ -3,6 +3,7 @@ import Search from "./components/Search";
 import ContactsDisplay from "./components/ContactsDisplay";
 import PersonForm from "./components/PersonForm";
 import axios from "axios";
+import contactsService from "./services/contacts";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -12,8 +13,11 @@ const App = () => {
 
   //use effect to fetch data from server to initialize contacts
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
-      setPersons(response.data);
+    // axios.get("http://localhost:3001/persons").then((response) => {
+    //   setPersons(response.data);
+    // });
+    contactsService.getAll().then((initialContacts) => {
+      setPersons(initialContacts);
     });
   }, []);
 
@@ -34,7 +38,10 @@ const App = () => {
     };
     //set persons state
     // Update the persons state
-    setPersons([...persons, personObject]);
+    contactsService.create(personObject).then((returnedPerson) => {
+      setPersons(persons.concat(returnedPerson));
+    });
+    // setPersons([...persons, personObject]);
     //clear input
     setNewName("");
     setNumber("");
