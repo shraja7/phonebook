@@ -4,12 +4,14 @@ import ContactsDisplay from "./components/ContactsDisplay";
 import PersonForm from "./components/PersonForm";
 import axios from "axios";
 import contactsService from "./services/contacts";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [number, setNumber] = useState("");
   const [search, setSearch] = useState("");
+  const [notificationMessage, setNotificationMessage] = useState(null);
 
   //use effect to fetch data from server to initialize contacts
   useEffect(() => {
@@ -45,7 +47,16 @@ const App = () => {
                 person.id !== nameExists.id ? person : returnedPerson
               )
             );
+
+            setNotificationMessage({
+              message: `${returnedPerson.name} updated successfully`,
+              type: "success",
+            });
+            setTimeout(() => {
+              setNotificationMessage(null);
+            }, 5000);
           })
+
           .catch((error) => {
             if (error.response && error.response.status === 404) {
               console.log(`Contact with ID ${nameExists.id} not found`);
@@ -66,6 +77,14 @@ const App = () => {
     contactsService.create(personObject).then((returnedPerson) => {
       setPersons(persons.concat(returnedPerson));
     });
+    setNotificationMessage({
+      message: `${personObject.name} added successfully`,
+      type: "success",
+    });
+    setTimeout(() => {
+      setNotificationMessage(null);
+    }, 5000);
+
     // setPersons([...persons, personObject]);
     //clear input
     setNewName("");
@@ -91,10 +110,19 @@ const App = () => {
     );
   });
   const deletePerson = (id) => {
+    const personToDelete = persons.find((person) => person.id === id);
+
     contactsService
       .remove(id)
       .then(() => {
         setPersons(persons.filter((person) => person.id !== id));
+        setNotificationMessage({
+          message: `${personToDelete.name} deleted successfully`,
+          type: "error",
+        });
+        setTimeout(() => {
+          setNotificationMessage(null);
+        }, 5000); // Set timeout to remove the error message after 5 seconds
       })
       .catch((error) => {
         if (error.response && error.response.status === 404) {
@@ -108,6 +136,12 @@ const App = () => {
   return (
     <div className="container">
       <h2>Phonebook</h2>
+      {notificationMessage && (
+        <Notification
+          message={notificationMessage.message}
+          type={notificationMessage.type}
+        />
+      )}
       <Search handleSearch={handleSearch} search={search} />
 
       <h2>Add New</h2>
