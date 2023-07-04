@@ -9,6 +9,7 @@ The Phonebook Application is a web-based contact management system that allows u
 - Display Contacts: All the added contacts are displayed in a list format, showing the name and phone number.
 - Update Contacts: Users can edit the name or phone number of existing contacts.
 - Delete Contacts: Contacts can be deleted from the phonebook.
+- Notification Component: Displays success or error messages for various operations.
 
 ## Getting Started
 
@@ -17,6 +18,10 @@ The Phonebook Application is a web-based contact management system that allows u
 3. Start the frontend application with `npm start`.
 4. Start the JSON server for the backend by navigating to the `backend` directory and running `npm start`.
 5. Access the application in your web browser at `http://localhost:3000`.
+
+## Notification Component
+
+The Phonebook Application includes a Notification component to display success or error messages for different operations. The component highlights the message with different colors based on the success or error type.
 
 ## Backend Integration
 
