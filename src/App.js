@@ -28,7 +28,32 @@ const App = () => {
       (p) => p.name.trim().toLowerCase() === newName.trim().toLowerCase()
     );
     if (nameExists) {
-      alert(`${newName} is already added to phonebook`);
+      //use contacService to update the number
+      const confirmUpdate = window.confirm(
+        `${newName} is already added to phonebook, replace the old number with a new one?`
+      );
+      if (confirmUpdate) {
+        const personObject = {
+          name: newName,
+          number: number,
+        };
+        contactsService
+          .update(nameExists.id, personObject)
+          .then((returnedPerson) => {
+            setPersons(
+              persons.map((person) =>
+                person.id !== nameExists.id ? person : returnedPerson
+              )
+            );
+          })
+          .catch((error) => {
+            if (error.response && error.response.status === 404) {
+              console.log(`Contact with ID ${nameExists.id} not found`);
+            } else {
+              console.log("Error updating contact:", error);
+            }
+          });
+      }
       return;
     }
     //new person object
