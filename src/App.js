@@ -65,6 +65,21 @@ const App = () => {
       person.number.includes(searchInput)
     );
   });
+  const deletePerson = (id) => {
+    contactsService
+      .remove(id)
+      .then(() => {
+        setPersons(persons.filter((person) => person.id !== id));
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 404) {
+          console.log(`Contact with ID ${id} not found`);
+        } else {
+          console.log("Error deleting contact:", error);
+        }
+      });
+  };
+
   return (
     <div className="container">
       <h2>Phonebook</h2>
@@ -80,7 +95,10 @@ const App = () => {
       />
 
       <h2>Contacts</h2>
-      <ContactsDisplay filteredPersons={filteredPersons} />
+      <ContactsDisplay
+        filteredPersons={filteredPersons}
+        deletePerson={deletePerson}
+      />
     </div>
   );
 };
