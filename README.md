@@ -1,24 +1,29 @@
 # Phonebook Application
 
-The Phonebook Application is a simple web-based contact management system. It allows users to add, search, and view contacts in a phonebook.
+The Phonebook Application is a web-based contact management system that allows users to add, search, view, update, and delete contacts in a phonebook. It is built using React for the frontend and a simple JSON server as the backend.
 
 ## Features
 
 - Add Contacts: Users can add new contacts by entering their name and phone number.
 - Search Contacts: The application provides a search functionality to find contacts based on their name or phone number.
 - Display Contacts: All the added contacts are displayed in a list format, showing the name and phone number.
+- Update Contacts: Users can edit the name or phone number of existing contacts.
+- Delete Contacts: Contacts can be deleted from the phonebook.
 
 ## Getting Started
 
 1. Clone the repository.
-2. Install the required dependencies using `npm install`.
-3. Start the application with `npm start`.
-4. Access the application in your web browser at `http://localhost:3000`.
+2. Install the required dependencies for both the frontend and backend using `npm install` in the root directory.
+3. Start the frontend application with `npm start`.
+4. Start the JSON server for the backend by navigating to the `backend` directory and running `npm start`.
+5. Access the application in your web browser at `http://localhost:3000`.
 
-## Technologies Used
+## Backend Integration
 
-- React: A JavaScript library for building user interfaces.
-- useState Hook: React Hook for managing state within functional components.
+The backend for this application is implemented using a simple JSON server with a `db.json` file to simulate a database.
+
+- The `db.json` file contains an array of contacts, each having properties like `id`, `name`, and `phone`.
+- The JSON server provides a RESTful API to perform CRUD operations on the `db.json` file.
 
 ## License
 
