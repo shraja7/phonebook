@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Search from "./components/Search";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -55,17 +56,7 @@ const App = () => {
   return (
     <div className="container">
       <h2>Phonebook</h2>
-      <div className="search-container">
-        <div className="input-field">
-          Search:
-          <input
-            type="text"
-            onChange={handleSearch}
-            value={search}
-            className="search-field"
-          />
-        </div>
-      </div>
+      <Search handleSearch={handleSearch} search={search} />
 
       <h2>Add New</h2>
 
