@@ -17,7 +17,8 @@ body {
   margin-bottom: 1rem;
 }
 
-.input-field input {
+.input-field input,
+.number-field input {
   padding: 0.5rem;
   width: 100%;
   border: 1px solid #ccc;
@@ -30,4 +31,15 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.contacts-container {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-column {
+  margin: 0 1rem;
+  flex: 1;
+  text-align: left;
 }
