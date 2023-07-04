@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Search from "./components/Search";
+import ContactsDisplay from "./components/ContactsDisplay";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -80,14 +81,7 @@ const App = () => {
         </div>
       </form>
       <h2>Contacts</h2>
-      <div className="contacts-container">
-        {filteredPersons.map((person) => (
-          <div key={person.name} className="contact-box">
-            <p className="contact-name">{person.name}</p>
-            <p className="contact-number">{person.number}</p>
-          </div>
-        ))}
-      </div>
+      <ContactsDisplay filteredPersons={filteredPersons} />
     </div>
   );
 };
