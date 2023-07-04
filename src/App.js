@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Search from "./components/Search";
 import ContactsDisplay from "./components/ContactsDisplay";
+import PersonForm from "./components/PersonForm";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -60,26 +61,14 @@ const App = () => {
       <Search handleSearch={handleSearch} search={search} />
 
       <h2>Add New</h2>
+      <PersonForm
+        addPerson={addPerson}
+        handleNameInput={handleNameInput}
+        handleNumberInput={handleNumberInput}
+        newName={newName}
+        number={number}
+      />
 
-      <form className="form-container" onSubmit={addPerson}>
-        <div className="input-field">
-          Name: <input type="text" onChange={handleNameInput} value={newName} />
-        </div>
-        <div className="number-field">
-          Number:{" "}
-          <input
-            type="text"
-            onChange={handleNumberInput}
-            value={number}
-            className="number-field"
-          />
-        </div>
-        <div>
-          <button className="button" type="submit">
-            add
-          </button>
-        </div>
-      </form>
       <h2>Contacts</h2>
       <ContactsDisplay filteredPersons={filteredPersons} />
     </div>
