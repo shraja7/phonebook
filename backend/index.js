@@ -34,7 +34,55 @@ app.get("/api/persons", (req, res) => {
   res.send(persons);
 });
 
-//routes
+//info page
+app.get("/info", (req, res) => {
+  const date = new Date();
+  res.send(`<p>Phonebook has info for ${persons.length} people</p>
+    <p>${date}</p>`);
+});
+
+//route to get a single contact
+app.get("/api/persons/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const person = persons.find((person) => person.id === id);
+  if (person) {
+    res.json(person);
+  } else {
+    res.status(404).end();
+  }
+});
+
+//route to delete a contact
+app.delete("/api/persons/:id", (req, res) => {
+  const id = Number(req.params.id);
+  persons = persons.filter((person) => person.id !== id);
+  res.status(204).end();
+});
+
+//route to add a contact
+app.post("/api/persons", (req, res) => {
+  const body = req.body;
+  if (!body.name || !body.number) {
+    return res.status(400).json({
+      error: "name or number missing",
+    });
+  }
+  const nameExists = persons.find(
+    (p) => p.name.trim().toLowerCase() === body.name.trim().toLowerCase()
+  );
+  if (nameExists) {
+    return res.status(400).json({
+      error: "name must be unique",
+    });
+  }
+  const person = {
+    id: Math.floor(Math.random() * 1000),
+    name: body.name,
+    number: body.number,
+  };
+  persons = persons.concat(person);
+  res.json(person);
+});
 
 //listen to port
 const PORT = 3005;
