@@ -18,6 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:prod": "npm run build && mv build backend && rm -rf build",
+    "build:ui": "rm -rf backend/build && cd frontend && npm run build && cp -r build ../backend",
+    "deploy:full": "npm run build:ui && cd backend && git add . && git commit -m uibuild && git push",
     "test": "react-scripts test",
     "server": "json-server --watch db.json --port 3001",
     "eject": "react-scripts eject"
