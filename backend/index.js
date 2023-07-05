@@ -3,6 +3,13 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
+//implement morgan
+const morgan = require("morgan");
+morgan.token("body", (req, res) => JSON.stringify(req.body));
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms :body")
+);
+
 //middleware
 app.use(cors());
 app.use(express.json());
