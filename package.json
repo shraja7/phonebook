@@ -17,6 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:prod": "npm run build && mv build backend && rm -rf build",
     "test": "react-scripts test",
     "server": "json-server --watch db.json --port 3001",
     "eject": "react-scripts eject"
