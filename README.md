@@ -16,7 +16,7 @@ The Phonebook Application is a web-based contact management system that allows u
 1. Clone the repository.
 2. Install the required dependencies for both the frontend and backend using `npm install` in the root directory.
 3. Start the frontend application with `npm start`.
-4. Start the JSON server for the backend by navigating to the `backend` directory and running `npm start`.
+4. Start the JSON server for the backend by running `npm run server`.
 5. Access the application in your web browser at `http://localhost:3000`.
 
 ## Notification Component
@@ -29,6 +29,10 @@ The backend for this application is implemented using a simple JSON server with 
 
 - The `db.json` file contains an array of contacts, each having properties like `id`, `name`, and `phone`.
 - The JSON server provides a RESTful API to perform CRUD operations on the `db.json` file.
+
+## Demo
+
+![Alt Text](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXhxamFmdGlzOThsYWR0aG9nNWFzOTY1NTUwb2l3Z3I4Zmhicjh3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6Fept60hVrNCc5FrSd/giphy.gif)
 
 ## License
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Search from "./components/Search";
 import ContactsDisplay from "./components/ContactsDisplay";
 import PersonForm from "./components/PersonForm";
-import axios from "axios";
+
 import contactsService from "./services/contacts";
 import Notification from "./components/Notification";
 
