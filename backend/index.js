@@ -1,4 +1,6 @@
 //setup express server
+const Person = require("./models/person");
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -45,7 +47,9 @@ let persons = [
 ];
 //static files
 app.get("/api/persons", (req, res) => {
-  res.send(persons);
+  Person.find({}).then((persons) => {
+    res.json(persons);
+  });
 });
 
 //info page
