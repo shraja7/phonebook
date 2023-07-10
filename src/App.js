@@ -56,7 +56,6 @@ const App = () => {
               setNotificationMessage(null);
             }, 5000);
           })
-
           .catch((error) => {
             if (error.response && error.response.status === 404) {
               console.log(`Contact with ID ${nameExists.id} not found`);
@@ -74,18 +73,37 @@ const App = () => {
     };
     //set persons state
     // Update the persons state
-    contactsService.create(personObject).then((returnedPerson) => {
-      setPersons(persons.concat(returnedPerson));
-    });
-    setNotificationMessage({
-      message: `${personObject.name} added successfully`,
-      type: "success",
-    });
-    setTimeout(() => {
-      setNotificationMessage(null);
-    }, 5000);
+    contactsService
+      .create(personObject)
+      .then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+        setNotificationMessage({
+          message: `${personObject.name} added successfully`,
+          type: "success",
+        });
+        setTimeout(() => {
+          setNotificationMessage(null);
+        }, 5000);
+      })
+      .catch((error) => {
+        if (error.response && error.response.data.error) {
+          setNotificationMessage({
+            message: error.response.data.error,
+            type: "error",
+          });
+        } else if (error.response && error.response.data.message) {
+          setNotificationMessage({
+            message: error.response.data.message,
+            type: "error",
+          });
+          setTimeout(() => {
+            setNotificationMessage(null);
+          }, 5000);
+        } else {
+          console.log("Error creating contact:", error);
+        }
+      });
 
-    // setPersons([...persons, personObject]);
     //clear input
     setNewName("");
     setNumber("");

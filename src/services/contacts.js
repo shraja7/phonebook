@@ -1,8 +1,8 @@
 import axios from "axios";
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://phonebook-req4.onrender.com/api/persons"
-    : "/api/persons";
+const baseUrl = "/api/persons";
+// process.env.NODE_ENV === "production"
+//   ? "https://phonebook-req4.onrender.com/api/persons"
+//   : "/api/persons";
 
 const getAll = () => {
   const request = axios.get(baseUrl);
